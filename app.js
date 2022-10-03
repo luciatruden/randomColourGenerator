@@ -15,10 +15,23 @@ randomButton.addEventListener('click', ()=> {
 
     const mainColour = document.querySelector('#randomColour');
     mainColour.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+    mainColour.style.color = `rgb(${compRed},${compGreen},${compBlue})`;
 
     const rgbHeading = document.querySelector('h1');
     rgbHeading.innerText = `rgb(${red}, ${green}, ${blue})`;
 
     const hexHeading = document.querySelector('h2');
     hexHeading.innerText = `#${redHex}${greenHex}${blueHex}`;
+
+    // relatedColours
+    const relColour = document.querySelector('#relatedColours');
+    relColour.style.backgroundColor = `rgb(${compRed},${compGreen},${compBlue})`;
+
+    const complementary = document.querySelector('#complementary');
+    complementary.style.backgroundColor = `rgb(${compRed},${compGreen},${compBlue})`;
+    complementary.style.color = `rgb(${red}, ${green}, ${blue})`;
+    const compHeading = document.querySelector('#completementary div');
+    //compHeading.innerText
+
+    
 })
