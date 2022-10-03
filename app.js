@@ -68,8 +68,8 @@ const generateColours = function (evt) {
 }
 
 //change colours on button press
-const randomButton = document.querySelector('button');
-randomButton.addEventListener('click', generateColours);
+// const randomButton = document.querySelector('button');
+// randomButton.addEventListener('click', generateColours);
 
 //change colours on key press
 document.addEventListener('keypress', generateColours);
