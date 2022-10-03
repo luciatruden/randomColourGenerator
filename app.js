@@ -1,41 +1,68 @@
-const randomButton = document.querySelector('button');
-
-randomButton.addEventListener('click', ()=> {
+//Returns array with random colour
+const makeRandRGBColour = () => {
     const red = Math.floor(Math.random()*255);
     const green = Math.floor(Math.random()*255);
     const blue = Math.floor(Math.random()*255);
 
-    const compRed = 255 - red;
-    const compGreen = 255 - green;
-    const compBlue = 255 - blue;
+    return [red, green, blue];
+}
 
-    const redHex = red.toString(16);
-    const greenHex = green.toString(16);
-    const blueHex = blue.toString(16);
+//returns array with complementary colour
+const getCompColour = function (rgbArray) {
+    const red = rgbArray[0];
+    const green = rgbArray[1];
+    const blue = rgbArray[2];
+
+    return [255 - red, 255 - green, 255 - blue];
+}
+
+//returns colour in rgb string
+const getRGBColour = function (rgbArray) {
+    const red = rgbArray[0];
+    const green = rgbArray[1];
+    const blue = rgbArray[2];
+    return `rgb(${red}, ${green}, ${blue})`;
+}
+
+//returns colour in Hex format
+const getHexColour = function (rgbArray) {
+    const red = rgbArray[0];
+    const green = rgbArray[1];
+    const blue = rgbArray[2];
+    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
+}
+
+const randomButton = document.querySelector('button');
+
+randomButton.addEventListener('click', ()=> {
+    const randomColour = makeRandRGBColour();
+    
+    const complementaryColour = getCompColour(randomColour);
+      
 
     const mainColour = document.querySelector('#randomColour');
-    mainColour.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
-    mainColour.style.color = `rgb(${compRed},${compGreen},${compBlue})`;
+    mainColour.style.backgroundColor = getRGBColour(randomColour);
+    mainColour.style.color = getRGBColour(complementaryColour);
 
-    const rgbHeading = document.querySelector('h1');
-    rgbHeading.innerText = `rgb(${red}, ${green}, ${blue})`;
+    const rgbHeading = document.querySelector('#rgbColour');
+    rgbHeading.innerText = getRGBColour(randomColour);
 
-    const hexHeading = document.querySelector('h2');
-    hexHeading.innerText = `#${redHex}${greenHex}${blueHex}`;
+    const hexHeading = document.querySelector('#hexColour');
+    hexHeading.innerText = getHexColour(randomColour);
 
     // relatedColours
     const relColour = document.querySelector('#relatedColours');
-    relColour.style.backgroundColor = `rgb(${compRed},${compGreen},${compBlue})`;
+    relColour.style.backgroundColor = getRGBColour(complementaryColour);
 
     const complementary = document.querySelector('#complementary');
-    complementary.style.backgroundColor = `rgb(${compRed},${compGreen},${compBlue})`;
-    complementary.style.color = `rgb(${red}, ${green}, ${blue})`;
+    complementary.style.backgroundColor = getRGBColour(complementaryColour);
+    complementary.style.color = getRGBColour(randomColour);
     
     const compRGB = document.querySelector('#compRGB');
-    compRGB.innerText = `rgb(${compRed},${compGreen},${compBlue})`;
+    compRGB.innerText = getRGBColour(complementaryColour);
 
     const compHex = document.querySelector('#compHex');
-    compHex.innerText = `#${compRed.toString(16)}${compGreen.toString(16)}${compBlue.toString(16)}`
+    compHex.innerText = getHexColour(complementaryColour);
 
     
 })
