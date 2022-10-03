@@ -16,7 +16,7 @@ const getCompColour = function (rgbArray) {
     return [255 - red, 255 - green, 255 - blue];
 }
 
-//returns colour in rgb string
+//returns colour in RGB format
 const getRGBColour = function (rgbArray) {
     const red = rgbArray[0];
     const green = rgbArray[1];
@@ -32,9 +32,11 @@ const getHexColour = function (rgbArray) {
     return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
 }
 
-const randomButton = document.querySelector('button');
+//Function to generate new colour scheme
+const generateColours = function (evt) {
 
-randomButton.addEventListener('click', ()=> {
+    console.log(evt);
+
     const randomColour = makeRandRGBColour();
     
     const complementaryColour = getCompColour(randomColour);
@@ -63,6 +65,11 @@ randomButton.addEventListener('click', ()=> {
 
     const compHex = document.querySelector('#compHex');
     compHex.innerText = getHexColour(complementaryColour);
+}
 
-    
-})
+//change colours on button press
+const randomButton = document.querySelector('button');
+randomButton.addEventListener('click', generateColours);
+
+//change colours on key press
+document.addEventListener('keypress', generateColours);
