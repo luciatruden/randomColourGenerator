@@ -32,44 +32,44 @@ const getHexColour = function (rgbArray) {
     return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
 }
 
-//Function to generate new colour scheme
+//Function to generate new colour scheme on pressing of Space key
 const generateColours = function (evt) {
+    console.log(evt.code);
 
-    console.log(evt);
-
-    const randomColour = makeRandRGBColour();
+    switch (evt.code){
+        case 'Space': 
+            const randomColour = makeRandRGBColour();
     
-    const complementaryColour = getCompColour(randomColour);
+            const complementaryColour = getCompColour(randomColour);
       
 
-    const mainColour = document.querySelector('#randomColour');
-    mainColour.style.backgroundColor = getRGBColour(randomColour);
-    mainColour.style.color = getRGBColour(complementaryColour);
+            const mainColour = document.querySelector('#randomColour');
+            mainColour.style.backgroundColor = getRGBColour(randomColour);
+            mainColour.style.color = getRGBColour(complementaryColour);
 
-    const rgbHeading = document.querySelector('#rgbColour');
-    rgbHeading.innerText = getRGBColour(randomColour);
+            const rgbHeading = document.querySelector('#rgbColour');
+            rgbHeading.innerText = getRGBColour(randomColour);
 
-    const hexHeading = document.querySelector('#hexColour');
-    hexHeading.innerText = getHexColour(randomColour);
+            const hexHeading = document.querySelector('#hexColour');
+            hexHeading.innerText = getHexColour(randomColour);
 
-    // relatedColours
-    const relColour = document.querySelector('#relatedColours');
-    relColour.style.backgroundColor = getRGBColour(complementaryColour);
+            // relatedColours
+            const relColour = document.querySelector('#relatedColours');
+            relColour.style.backgroundColor = getRGBColour(complementaryColour);
 
-    const complementary = document.querySelector('#complementary');
-    complementary.style.backgroundColor = getRGBColour(complementaryColour);
-    complementary.style.color = getRGBColour(randomColour);
+            const complementary = document.querySelector('#complementary');
+            complementary.style.backgroundColor = getRGBColour(complementaryColour);
+            complementary.style.color = getRGBColour(randomColour);
+            
+            const compRGB = document.querySelector('#compRGB');
+            compRGB.innerText = getRGBColour(complementaryColour);
+
+            const compHex = document.querySelector('#compHex');
+            compHex.innerText = getHexColour(complementaryColour);
+    }
     
-    const compRGB = document.querySelector('#compRGB');
-    compRGB.innerText = getRGBColour(complementaryColour);
-
-    const compHex = document.querySelector('#compHex');
-    compHex.innerText = getHexColour(complementaryColour);
 }
 
-//change colours on button press
-// const randomButton = document.querySelector('button');
-// randomButton.addEventListener('click', generateColours);
 
 //change colours on key press
 document.addEventListener('keypress', generateColours);
