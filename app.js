@@ -30,8 +30,12 @@ randomButton.addEventListener('click', ()=> {
     const complementary = document.querySelector('#complementary');
     complementary.style.backgroundColor = `rgb(${compRed},${compGreen},${compBlue})`;
     complementary.style.color = `rgb(${red}, ${green}, ${blue})`;
-    const compHeading = document.querySelector('#completementary div');
-    //compHeading.innerText
+    
+    const compRGB = document.querySelector('#compRGB');
+    compRGB.innerText = `rgb(${compRed},${compGreen},${compBlue})`;
+
+    const compHex = document.querySelector('#compHex');
+    compHex.innerText = `#${compRed.toString(16)}${compGreen.toString(16)}${compBlue.toString(16)}`
 
     
 })
