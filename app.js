@@ -86,15 +86,28 @@ const saveColour = function () {
     //Get parent element
     const savedColoursDiv = document.querySelector('#savedColours');
 
-    // Create new div element for saved colour
+    // Create new div elements for saved colour combination
+    const savedCombinationDiv = document.createElement('div');
+    savedCombinationDiv.classList.add('savedColourComb');
+    //randomColour Div
     const newColourDiv = document.createElement('div');
     newColourDiv.style.backgroundColor = getRGBColour(randomColour);
     newColourDiv.style.color = getRGBColour(complementaryColour);
     newColourDiv.innerText = getRGBColour(randomColour);
-    newColourDiv.classList.add('savedColourDiv');
+    newColourDiv.classList.add('randomColourDiv');
+
+    //complementaryColour Div
+    const compColourDiv = document.createElement('div');
+    compColourDiv.style.backgroundColor = getRGBColour(complementaryColour);
+    compColourDiv.style.color = getRGBColour(randomColour);
+    compColourDiv.innerText = getRGBColour(complementaryColour);
+    compColourDiv.classList.add('compColourDiv');
 
     //Append
-    savedColoursDiv.appendChild(newColourDiv);
+    savedCombinationDiv.appendChild(newColourDiv);
+    savedCombinationDiv.appendChild(compColourDiv);
+
+    savedColoursDiv.appendChild(savedCombinationDiv);
 }
 
 //change colours on key press

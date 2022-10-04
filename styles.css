@@ -53,8 +53,22 @@ body {
     background-color: pink;
 }
 
-.savedColourDiv {
+.savedColourComb {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.randomColourDiv {
     height: 30px;
-    width: 100px;
+    width: 100%;
     text-align: center;
+    border-radius: 20px 0 0 20px;
+}
+
+.compColourDiv {
+    height: 30px;
+    width: 100%;
+    text-align: center;
+    border-radius: 0 20px 20px 0;
 }
