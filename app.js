@@ -82,13 +82,14 @@ const generateColours = function (evt) {
 
 //Function to create new div with saved colour combination
 const saveColour = function () {
-    console.log("in saveColour")
+    
     //Get parent element
     const savedColoursDiv = document.querySelector('#savedColours');
 
     // Create new div elements for saved colour combination
     const savedCombinationDiv = document.createElement('div');
     savedCombinationDiv.classList.add('savedColourComb');
+
     //randomColour Div
     const newColourDiv = document.createElement('div');
     newColourDiv.style.backgroundColor = getRGBColour(randomColour);
@@ -114,9 +115,17 @@ const saveColour = function () {
 document.addEventListener('keypress', generateColours);
 
 //Save colour combination
-const saveForm = document.querySelector('#savedColours form');
+const saveForm = document.querySelector('form');
 saveForm.addEventListener('submit', function (e) {
+    
     e.preventDefault();
     saveColour();
+})
+
+const saveDiv = document.querySelector('#savedColours');
+
+saveDiv.addEventListener('click', function(e){
+    
+    e.target.parentElement.remove();
 
 })
