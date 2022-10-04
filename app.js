@@ -126,6 +126,10 @@ const saveDiv = document.querySelector('#savedColours');
 
 saveDiv.addEventListener('click', function(e){
     
-    e.target.parentElement.remove();
+    //Only remove the individual colour combination (not its container)
+    if(/randomColourDiv|compColourDiv/.test(e.target.className)){
+        e.target.parentElement.remove();
+    }
+    
 
 })
