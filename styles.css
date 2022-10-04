@@ -41,3 +41,20 @@ body {
     align-items: center;
     
 }
+
+#savedColours {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px;
+
+    background-color: pink;
+}
+
+.savedColourDiv {
+    height: 30px;
+    width: 100px;
+    text-align: center;
+}

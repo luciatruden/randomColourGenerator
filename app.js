@@ -32,16 +32,21 @@ const getHexColour = function (rgbArray) {
     return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
 }
 
+//initialize global variables
+let randomColour = [0,0,0];
+let complementaryColour = [255,255,255];
+
 //Function to generate new colour scheme on pressing of Space key
 const generateColours = function (evt) {
-    console.log(evt.code);
+    // console.log(evt.code);
 
     switch (evt.code){
         case 'Space': 
-            const randomColour = makeRandRGBColour();
-    
-            const complementaryColour = getCompColour(randomColour);
-      
+            //const randomColour = makeRandRGBColour();
+            //const complementaryColour = getCompColour(randomColour);
+            randomColour = makeRandRGBColour();
+            complementaryColour = getCompColour(randomColour);
+            
 
             const mainColour = document.querySelector('#randomColour');
             mainColour.style.backgroundColor = getRGBColour(randomColour);
@@ -66,10 +71,39 @@ const generateColours = function (evt) {
 
             const compHex = document.querySelector('#compHex');
             compHex.innerText = getHexColour(complementaryColour);
+
+            return randomColour;
+        
+        default:
+            console.log("ignored");
     }
     
 }
 
+//Function to create new div with saved colour combination
+const saveColour = function () {
+    console.log("in saveColour")
+    //Get parent element
+    const savedColoursDiv = document.querySelector('#savedColours');
+
+    // Create new div element for saved colour
+    const newColourDiv = document.createElement('div');
+    newColourDiv.style.backgroundColor = getRGBColour(randomColour);
+    newColourDiv.style.color = getRGBColour(complementaryColour);
+    newColourDiv.innerText = getRGBColour(randomColour);
+    newColourDiv.classList.add('savedColourDiv');
+
+    //Append
+    savedColoursDiv.appendChild(newColourDiv);
+}
 
 //change colours on key press
 document.addEventListener('keypress', generateColours);
+
+//Save colour combination
+const saveForm = document.querySelector('#savedColours form');
+saveForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    saveColour();
+
+})
