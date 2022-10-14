@@ -5,20 +5,27 @@ let complementaryColour = [255,255,255];
 //Color Class constructor
 class Color {
     constructor(r, g, b) {
-        this.red = r;
-        this.green = g;
-        this.blue = b; 
+        this.r = r;
+        this.g = g;
+        this.b = b; 
         this.calcHSL();
     }
 
     getComplementaryColour () {
-        const {red, green, blue} = this;
-        return new Color(255 - red, 255 - green, 255 - blue);
+        const {r, g, b} = this;
+        return new Color(255 - r, 255 - g, 255 - b);
     }
 
+    // complementary () {
+    //     const {h, s, l} = this;
+    //     const newHue = (h + 180) % 360;
+    //     console.log(`opposite: hsl(${newHue}, ${s}%, ${l}%)`);
+    //     return `hsl(${newHue}, ${s}%, ${l}%)`;
+    // }
+
     innerRgb () {
-        const {red, green, blue} = this;
-        return `${red}, ${green}, ${blue}`;
+        const {r, g, b} = this;
+        return `${r}, ${g}, ${b}`;
     }
 
     rgb () {
@@ -30,29 +37,31 @@ class Color {
     }
 
     hex () {
-        const {red, green, blue} = this;
-        return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+        const {r, g, b} = this;
+        return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
     }
 
     hsl () {
-        const {hue, sat, light} = this;
-        return `hsl(${hue}, ${sat}%, ${light}%)`
+        const {h, s, l} = this;
+        return `hsl(${h}, ${s}%, ${l}%)`;
     }
 
     calcHSL() {
 		let { r, g, b } = this;
 		// Make r, g, and b fractions of 1
-		r /= 255;
+
+        r /= 255;
 		g /= 255;
 		b /= 255;
 
 		// Find greatest and smallest channel values
-		let cmin = Math.min(r, g, b),
-			cmax = Math.max(r, g, b),
+        let cmin = Math.min(r, g, b)
+		let cmax = Math.max(r, g, b),
 			delta = cmax - cmin,
 			h = 0,
 			s = 0,
 			l = 0;
+            
 		if (delta == 0) h = 0;
 		else if (cmax == r)
 			// Red is max
@@ -65,18 +74,19 @@ class Color {
 			h = (r - g) / delta + 4;
 
 		h = Math.round(h * 60);
-
+        
 		// Make negative hues positive behind 360°
 		if (h < 0) h += 360;
 		// Calculate lightness
 		l = (cmax + cmin) / 2;
-
+        
 		// Calculate saturation
 		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-
+        
 		// Multiply l and s by 100
 		s = +(s * 100).toFixed(1);
 		l = +(l * 100).toFixed(1);
+        
 		this.h = h;
 		this.s = s;
 		this.l = l;
