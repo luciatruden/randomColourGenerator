@@ -5,15 +5,23 @@ class Color {
         this.green = g;
         this.blue = b;
 
-        //this.complementary = getComplementaryColour(new Color(this.red, this.green, this.blue))
-
+        //returns complementary Color object
         this.getComplementaryColour = function () {
 
             return new Color(255 - this.red, 255 - this.green, 255 - this.blue)
         }
-    }
 
+        //returns string RGB colour
+        this.rgbString = function () {
+            return `rgb(${this.red}, ${this.green}, ${this.blue})`;
+        }
+
+        //return string with hex colour
+        this.hexString = function (color) {
     
+            return `#${this.red.toString(16)}${this.green.toString(16)}${this.blue.toString(16)}`
+        }
+    }
 }
 
 
@@ -24,24 +32,6 @@ const getRandomColour = () => {
     const blue = Math.floor(Math.random()*255);
 
     return new Color(red, green, blue)
-}
-
-//returns complementary Color object
-// const getComplementaryColour = function (color) {
-
-//     return new Color(255 - color.red, 255 - color.green, 255 - color.blue)
-// }
-
-//returns string RGB colour
-const rgbString = function (color) {
-
-    return `rgb(${color.red}, ${color.green}, ${color.blue})`;
-}
-
-//returns string with Hex colour
-const hexString = function (color) {
-    
-    return `#${color.red.toString(16)}${color.green.toString(16)}${color.blue.toString(16)}`
 }
 
 //initialize global variables
@@ -56,35 +46,32 @@ const generateColours = function (evt) {
         case 'Space': 
             
             randomColour = getRandomColour();
-            //complementaryColour = getComplementaryColour(randomColour);
             complementaryColour = randomColour.getComplementaryColour();
             
 
             const mainColour = document.querySelector('#randomColour');
-            mainColour.style.backgroundColor = rgbString(randomColour);
-            mainColour.style.color = rgbString(complementaryColour);
+            mainColour.style.backgroundColor = randomColour.rgbString();
+            mainColour.style.color = complementaryColour.rgbString();
 
             const rgbHeading = document.querySelector('#rgbColour');
-            rgbHeading.innerText = rgbString(randomColour);
+            rgbHeading.innerText = randomColour.rgbString();
 
             const hexHeading = document.querySelector('#hexColour');
-            hexHeading.innerText = hexString(randomColour);
+            hexHeading.innerText = randomColour.hexString();
 
             // relatedColours
             const relColour = document.querySelector('#relatedColours');
-            relColour.style.backgroundColor = rgbString(complementaryColour);
+            relColour.style.backgroundColor = complementaryColour.rgbString();
 
             const complementary = document.querySelector('#complementary');
-            complementary.style.backgroundColor = rgbString(complementaryColour);
-            complementary.style.color = rgbString(randomColour);
+            complementary.style.backgroundColor = complementaryColour.rgbString();
+            complementary.style.color = randomColour.rgbString();
             
             const compRGB = document.querySelector('#compRGB');
-            compRGB.innerText = rgbString(complementaryColour);
+            compRGB.innerText = complementaryColour.rgbString();
 
             const compHex = document.querySelector('#compHex');
-            compHex.innerText = hexString(complementaryColour);
-
-            // return randomColour;
+            compHex.innerText = complementaryColour.hexString();
         
         default:
             console.log("ignored");
@@ -95,9 +82,9 @@ const generateColours = function (evt) {
 //Create div for saved colour of 
 const newSavedColourDiv = function (color, cssClass) {
     const newColourDiv = document.createElement('div');
-    newColourDiv.style.backgroundColor = rgbString(color);
-    newColourDiv.style.color = rgbString(color.getComplementaryColour());
-    newColourDiv.innerText = rgbString(color);
+    newColourDiv.style.backgroundColor = color.rgbString();
+    newColourDiv.style.color = color.getComplementaryColour().rgbString();
+    newColourDiv.innerText = color.rgbString();
     newColourDiv.classList.add(cssClass);
 
     return newColourDiv
@@ -147,6 +134,4 @@ saveDiv.addEventListener('click', function(e){
     if(/randomColourDiv|compColourDiv/.test(e.target.className)){
         e.target.parentElement.remove();
     }
-    
-
 })
