@@ -1,27 +1,30 @@
+//initialize global variables
+let randomColour = [0,0,0];
+let complementaryColour = [255,255,255];
+
 //Color Class constructor
 class Color {
     constructor(r, g, b) {
         this.red = r;
         this.green = g;
         this.blue = b;
-
-        //returns complementary Color object
-        this.getComplementaryColour = function () {
-
-            return new Color(255 - this.red, 255 - this.green, 255 - this.blue)
-        }
-
-        //returns string RGB colour
-        this.rgbString = function () {
-            return `rgb(${this.red}, ${this.green}, ${this.blue})`;
-        }
-
-        //return string with hex colour
-        this.hexString = function (color) {
-    
-            return `#${this.red.toString(16)}${this.green.toString(16)}${this.blue.toString(16)}`
-        }
+        
     }
+}
+
+//returns complementary Color object
+Color.prototype.getComplementaryColour = function () {
+    return new Color(255 - this.red, 255 - this.green, 255 - this.blue)
+}
+
+//returns string RGB colour
+Color.prototype.rgbString = function () {
+    return `rgb(${this.red}, ${this.green}, ${this.blue})`;
+}
+
+//return string with hex colour
+Color.prototype.hexString = function (color) {
+    return `#${this.red.toString(16)}${this.green.toString(16)}${this.blue.toString(16)}`
 }
 
 
@@ -34,9 +37,7 @@ const getRandomColour = () => {
     return new Color(red, green, blue)
 }
 
-//initialize global variables
-let randomColour = [0,0,0];
-let complementaryColour = [255,255,255];
+
 
 //change background colour of doc element
 const changeBackgroundColor = function(color, cssID) {
