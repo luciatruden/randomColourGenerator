@@ -9,33 +9,27 @@ class Color {
         this.green = g;
         this.blue = b; 
     }
+
+    getComplementaryColour () {
+        const {red, green, blue} = this;
+        return new Color(255 - red, 255 - green, 255 - blue);
+    }
+
+    rgb () {
+        const {red, green, blue} = this;
+        return `rgb(${red}, ${green}, ${blue})`;
+    }
+
+    rgba (alpha=1.0) {
+        const {red, green, blue} = this;
+        return `rgb(${red}, ${green}, ${blue}), ${alpha}`;
+    }
+
+    hex () {
+        const {red, green, blue} = this;
+        return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+    }
 }
-
-//returns complementary Color object
-Color.prototype.getComplementaryColour = function () {
-    const {red, green, blue} = this;
-    return new Color(255 - red, 255 - green, 255 - blue)
-}
-
-//returns string RGB colour
-Color.prototype.rgb = function () {
-    const {red, green, blue} = this;
-    return `rgb(${red}, ${green}, ${blue})`;
-}
-
-//return string with rgba colour (default alpha value 1.0)
-Color.prototype.rgba = function (alpha=1.0) {
-    const {red, green, blue} = this;
-    return `rgb(${red}, ${green}, ${blue}), ${alpha}`;
-}
-
-//return string with hex colour
-Color.prototype.hex = function () {
-    const {red, green, blue} = this;
-    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
-}
-
-
 
 //Returns random Color object
 const getRandomColour = () => {
