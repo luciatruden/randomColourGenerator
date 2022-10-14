@@ -23,6 +23,11 @@ class Color {
     //     return `hsl(${newHue}, ${s}%, ${l}%)`;
     // }
 
+    // fullSaturation () {
+    //     const {h, l} = this;
+    //     return `hsl(${h}, 100%, ${l}%)`;
+    // }
+
     innerRgb () {
         const {r, g, b} = this;
         return `${r}, ${g}, ${b}`;
