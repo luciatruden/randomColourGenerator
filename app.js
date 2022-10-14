@@ -1,10 +1,19 @@
+//Color Class constructor
+function Color(r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+}
+
+
 //Returns array with random colour
 const makeRandRGBColour = () => {
     const red = Math.floor(Math.random()*255);
     const green = Math.floor(Math.random()*255);
     const blue = Math.floor(Math.random()*255);
 
-    return [red, green, blue];
+    // return [red, green, blue];
+    return new Color(red, green, blue)
 }
 
 //returns array with complementary colour
