@@ -18,16 +18,24 @@ Color.prototype.getComplementaryColour = function () {
 }
 
 //returns string RGB colour
-Color.prototype.rgbString = function () {
+Color.prototype.rgb = function () {
     const {red, green, blue} = this;
     return `rgb(${red}, ${green}, ${blue})`;
 }
 
+//return string with rgba colour (default alpha value 1.0)
+Color.prototype.rgba = function (alpha=1.0) {
+    const {red, green, blue} = this;
+    return `rgb(${red}, ${green}, ${blue}), ${alpha}`;
+}
+
 //return string with hex colour
-Color.prototype.hexString = function (color) {
+Color.prototype.hex = function () {
     const {red, green, blue} = this;
     return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
 }
+
+
 
 //Returns random Color object
 const getRandomColour = () => {
@@ -41,20 +49,20 @@ const getRandomColour = () => {
 //change background colour of doc element
 const changeBackgroundColor = function(color, cssID) {
     const element = document.querySelector(cssID);
-    element.style.backgroundColor = color.rgbString();
+    element.style.backgroundColor = color.rgb();
 } 
 
 //change background colour of doc element
 const changeTextColor = function(color, cssID) {
     const element = document.querySelector(cssID);
-    element.style.color = color.rgbString();
+    element.style.color = color.rgb();
 }
 
 //Change inner text of doc element
 const changeInnerText = function(color, cssID) {
 
     const element = document.querySelector(cssID);
-    element.innerText = color.rgbString();
+    element.innerText = color.rgb();
 }
 
 //Function to generate new colour scheme on pressing of Space key
@@ -85,15 +93,14 @@ const generateColours = function (evt) {
         default:
             console.log("ignored");
     }
-    
 }
 
 //Create div for saved colour of 
 const newSavedColourDiv = function (color, cssClass) {
     const newColourDiv = document.createElement('div');
-    newColourDiv.style.backgroundColor = color.rgbString();
-    newColourDiv.style.color = color.getComplementaryColour().rgbString();
-    newColourDiv.innerText = color.rgbString();
+    newColourDiv.style.backgroundColor = color.rgb();
+    newColourDiv.style.color = color.getComplementaryColour().rgb();
+    newColourDiv.innerText = color.rgb();
     newColourDiv.classList.add(cssClass);
 
     return newColourDiv
