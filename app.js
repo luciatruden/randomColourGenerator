@@ -8,6 +8,7 @@ class Color {
         this.red = r;
         this.green = g;
         this.blue = b; 
+        this.calcHSL();
     }
 
     getComplementaryColour () {
@@ -32,6 +33,54 @@ class Color {
         const {red, green, blue} = this;
         return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
     }
+
+    hsl () {
+        const {hue, sat, light} = this;
+        return `hsl(${hue}, ${sat}%, ${light}%)`
+    }
+
+    calcHSL() {
+		let { r, g, b } = this;
+		// Make r, g, and b fractions of 1
+		r /= 255;
+		g /= 255;
+		b /= 255;
+
+		// Find greatest and smallest channel values
+		let cmin = Math.min(r, g, b),
+			cmax = Math.max(r, g, b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0;
+		if (delta == 0) h = 0;
+		else if (cmax == r)
+			// Red is max
+			h = ((g - b) / delta) % 6;
+		else if (cmax == g)
+			// Green is max
+			h = (b - r) / delta + 2;
+		else
+			// Blue is max
+			h = (r - g) / delta + 4;
+
+		h = Math.round(h * 60);
+
+		// Make negative hues positive behind 360°
+		if (h < 0) h += 360;
+		// Calculate lightness
+		l = (cmax + cmin) / 2;
+
+		// Calculate saturation
+		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+		// Multiply l and s by 100
+		s = +(s * 100).toFixed(1);
+		l = +(l * 100).toFixed(1);
+		this.h = h;
+		this.s = s;
+		this.l = l;
+	}
 }
 
 //Returns random Color object
