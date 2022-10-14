@@ -15,14 +15,17 @@ class Color {
         return new Color(255 - red, 255 - green, 255 - blue);
     }
 
-    rgb () {
+    innerRgb () {
         const {red, green, blue} = this;
-        return `rgb(${red}, ${green}, ${blue})`;
+        return `${red}, ${green}, ${blue}`;
+    }
+
+    rgb () {
+        return `rgb(${this.innerRgb()})`;
     }
 
     rgba (alpha=1.0) {
-        const {red, green, blue} = this;
-        return `rgb(${red}, ${green}, ${blue}), ${alpha}`;
+        return `rgb(${this.innerRgb()}, ${alpha}`;
     }
 
     hex () {
@@ -54,7 +57,6 @@ const changeTextColor = function(color, cssID) {
 
 //Change inner text of doc element
 const changeInnerText = function(color, cssID) {
-
     const element = document.querySelector(cssID);
     element.innerText = color.rgb();
 }
