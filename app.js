@@ -38,6 +38,25 @@ const getRandomColour = () => {
 let randomColour = [0,0,0];
 let complementaryColour = [255,255,255];
 
+//change background colour of doc element
+const changeBackgroundColor = function(color, cssID) {
+    const element = document.querySelector(cssID);
+    element.style.backgroundColor = color.rgbString();
+} 
+
+//change background colour of doc element
+const changeTextColor = function(color, cssID) {
+    const element = document.querySelector(cssID);
+    element.style.color = color.rgbString();
+}
+
+//Change inner text of doc element
+const changeInnerText = function(color, cssID) {
+
+    const element = document.querySelector(cssID);
+    element.innerText = color.rgbString();
+}
+
 //Function to generate new colour scheme on pressing of Space key
 const generateColours = function (evt) {
     // console.log(evt.code);
@@ -48,30 +67,20 @@ const generateColours = function (evt) {
             randomColour = getRandomColour();
             complementaryColour = randomColour.getComplementaryColour();
             
+            //Main colour (random)
+            changeBackgroundColor(randomColour, '#randomColour');
+            changeTextColor(complementaryColour, '#randomColour');
+            changeInnerText(randomColour, '#rgbColour');
+            changeInnerText(randomColour, '#hexColour');
 
-            const mainColour = document.querySelector('#randomColour');
-            mainColour.style.backgroundColor = randomColour.rgbString();
-            mainColour.style.color = complementaryColour.rgbString();
-
-            const rgbHeading = document.querySelector('#rgbColour');
-            rgbHeading.innerText = randomColour.rgbString();
-
-            const hexHeading = document.querySelector('#hexColour');
-            hexHeading.innerText = randomColour.hexString();
-
-            // relatedColours
-            const relColour = document.querySelector('#relatedColours');
-            relColour.style.backgroundColor = complementaryColour.rgbString();
-
-            const complementary = document.querySelector('#complementary');
-            complementary.style.backgroundColor = complementaryColour.rgbString();
-            complementary.style.color = randomColour.rgbString();
+            // relatedColours div
+            changeBackgroundColor(complementaryColour, '#relatedColours');
             
-            const compRGB = document.querySelector('#compRGB');
-            compRGB.innerText = complementaryColour.rgbString();
-
-            const compHex = document.querySelector('#compHex');
-            compHex.innerText = complementaryColour.hexString();
+            // complementary colour
+            changeBackgroundColor(complementaryColour, '#complementary');
+            changeTextColor(randomColour, '#complementary');            
+            changeInnerText(complementaryColour, '#compRGB')
+            changeInnerText(complementaryColour, '#compHex')
         
         default:
             console.log("ignored");
@@ -89,7 +98,6 @@ const newSavedColourDiv = function (color, cssClass) {
 
     return newColourDiv
 }
-
 
 
 //Function to create new div with saved colour combination
