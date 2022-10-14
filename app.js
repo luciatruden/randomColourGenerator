@@ -7,26 +7,27 @@ class Color {
     constructor(r, g, b) {
         this.red = r;
         this.green = g;
-        this.blue = b;
-        
+        this.blue = b; 
     }
 }
 
 //returns complementary Color object
 Color.prototype.getComplementaryColour = function () {
-    return new Color(255 - this.red, 255 - this.green, 255 - this.blue)
+    const {red, green, blue} = this;
+    return new Color(255 - red, 255 - green, 255 - blue)
 }
 
 //returns string RGB colour
 Color.prototype.rgbString = function () {
-    return `rgb(${this.red}, ${this.green}, ${this.blue})`;
+    const {red, green, blue} = this;
+    return `rgb(${red}, ${green}, ${blue})`;
 }
 
 //return string with hex colour
 Color.prototype.hexString = function (color) {
-    return `#${this.red.toString(16)}${this.green.toString(16)}${this.blue.toString(16)}`
+    const {red, green, blue} = this;
+    return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`
 }
-
 
 //Returns random Color object
 const getRandomColour = () => {
@@ -36,8 +37,6 @@ const getRandomColour = () => {
 
     return new Color(red, green, blue)
 }
-
-
 
 //change background colour of doc element
 const changeBackgroundColor = function(color, cssID) {
@@ -99,7 +98,6 @@ const newSavedColourDiv = function (color, cssClass) {
 
     return newColourDiv
 }
-
 
 //Function to create new div with saved colour combination
 const saveColour = function () {
